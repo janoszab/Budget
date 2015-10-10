@@ -1,0 +1,14 @@
+{
+    "development": {
+        "dialect": "sqlite",
+        "storage": "./data/iBudget.sqlite"
+    },
+    "test": {
+        "dialect": "sqlite",
+        "storage": "./data/iBudget.sqlite"
+    },
+    "production": {
+        "dialect": "sqlite",
+        "storage": "./data/iBudget.sqlite"
+    }
+}
