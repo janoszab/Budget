@@ -11,6 +11,8 @@ var routes = require('./routes/index')(passport);
 
 var app = express();
 
+app.locals.isLoggedIn = false;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -26,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Configuring Passport
 app.use(expressSession({
+    name: 'iBudget',
     secret: 'mySecretKey',
     resave: true,
     saveUninitialized: true
@@ -37,6 +40,17 @@ app.use(flash());
 // Initialize Passport
 var initPassport = require('./passport/init');
 initPassport(passport);
+
+app.use(function(req, res, next) {
+    if(req.isAuthenticated()) {
+        app.locals.isLoggedIn = true;
+    } else {
+        app.locals.isLoggedIn = false;    
+    }
+
+    next();
+});
+
 
 app.use('/', routes);
 

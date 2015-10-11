@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-    var User = sequelize.define('User', {
-        username: {
+    var Tag = sequelize.define('Tag', {
+        name: {
             type: DataTypes.STRING,
             allowNull: false
         }
@@ -9,12 +9,13 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-                User.hasMany(models.Transaction, {
-                    foreignKey: 'userId'
+                Tag.belongsToMany(models.Transaction, {
+                    as: 'transactions',
+                    through: 'TransactionTags'
                 });
             }
         }
     });
 
-    return User;
+    return Tag;
 };

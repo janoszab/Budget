@@ -13,15 +13,33 @@ var isAuthenticated = function (req, res, next) {
 
 module.exports = function(passport){
 
-    /* GET login page. */
+    /* GET landing page. */
     router.get('/', function(req, res) {
-        // Display the Login page with any flash message, if any
-        res.render('index', { message: req.flash('message') });
+        res.render('index', {});
     });
 
     /* GET Home Page */
-    router.get('/home', isAuthenticated, function(req, res){
-        res.render('home', { user: req.user });
+    router.get('/dashboard', isAuthenticated, function(req, res){
+        res.render('dashboard', {
+            user: req.user
+        });
+    });
+
+    router.get('/add/transaction', function(req, res) {
+
+    });
+
+    router.get('/add/budget', function(req, res) {
+
+    });
+
+    router.get('/add/account', function(req, res) {
+
+    });
+
+    /* GET login page. */
+    router.get('/signin', function(req, res) {
+        res.render('signin', {});
     });
 
     /* Handle Logout */
@@ -39,7 +57,7 @@ module.exports = function(passport){
     // handle the callback after facebook has authenticated the user
     router.get('/login/facebook/callback',
         passport.authenticate('facebook', {
-            successRedirect : '/home',
+            successRedirect : '/dashboard',
             failureRedirect : '/'
         })
     );
