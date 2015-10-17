@@ -25,46 +25,39 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">iBudget</a>
-            </div>
+            <a class="navbar-brand" href="/">iBudget</a>
+            <ul class="nav navbar-nav navbar-right">
+                {{#if isLoggedIn}}
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="navigation">
-                <ul class="nav navbar-nav navbar-right">
-                    {{#if isLoggedIn}}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle profile" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img class="profile-pic" src="{{user.getProfilePictureSrc}}"> <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Signed in as: {{user.username}}</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/user/dashboard"><i class="fa fa-tachometer"></i> Dashboard</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Add</li>
+                            <li><a href="/user/transaction"><i class="fa fa-exchange"></i> Transaction</a></li>
+                            <li><a href="/user/budget"><i class="fa fa-usd"></i> Budget</a></li>
+                            <li><a href="/user/account"><i class="fa fa-user"></i> Account</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/signout"><i class="fa fa-sign-out"></i> Sign Out</a></li>
+                        </ul>
+                    </li>
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/add/transation"><i class="fa fa-plus"></i> Transaction</a></li>
-                                <li><a href="/add/budget"><i class="fa fa-plus"></i> Budget</a></li>
-                                <li><a href="/add/account"><i class="fa fa-plus"></i> Account</a></li>
-                            </ul>
-                        </li>
+                {{else}}
 
-                        <li><a href="/dashboard">Dashboard</a></li>
-                        <li class="icon">
-                            <a href="/signout" title="Sign Out"><i class="fa fa-sign-out fa-stack-2x"></i></a>
-                        </li>
-                    {{else}}
-                        <li class="icon">
-                            <a href="/signin" title="Sign In"><i class="fa fa-sign-in fa-stack-2x"></i></a>
-                        </li>
-                    {{/if}}
-                </ul>
-            </div>
+                    <li class="icon">
+                        <a href="/signin" title="Sign In"><i class="fa fa-sign-in fa-stack-2x"></i></a>
+                    </li>
+
+                {{/if}}
+            </ul>
+
         </div>
     </nav>
 
@@ -76,6 +69,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 </body>
 
 </html>

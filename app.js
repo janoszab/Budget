@@ -7,11 +7,16 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var expressSession = require('express-session');
 var flash = require('connect-flash');
-var routes = require('./routes/index')(passport);
+
+/* Routes */
+var defaultRoutes = require('./routes/index')(passport);
+var signinRoutes = require('./routes/signin')(passport);
+var userRoutes = require('./routes/user')(passport);
 
 var app = express();
 
 app.locals.isLoggedIn = false;
+app.locals.user = false;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,15 +49,19 @@ initPassport(passport);
 app.use(function(req, res, next) {
     if(req.isAuthenticated()) {
         app.locals.isLoggedIn = true;
+        app.locals.user = req.user;
     } else {
-        app.locals.isLoggedIn = false;    
+        app.locals.isLoggedIn = false;
+        app.locals.user = false;
     }
 
     next();
 });
 
 
-app.use('/', routes);
+app.use('/', defaultRoutes);
+app.use('/signin', signinRoutes);
+app.use('/user', userRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
