@@ -4,15 +4,13 @@ var router = express.Router();
 module.exports = function(passport){
 
     /* GET login page. */
-    router.get('/', function(req, res) {
+    router.get('/', function(req, res, next) {
         res.render('signin', {});
     });
 
     // route for facebook authentication and login
     // different scopes while logging in
-    router.get('/facebook',
-        passport.authenticate('facebook', { scope : 'email' }
-    ));
+    router.get('/facebook', passport.authenticate('facebook', { scope : 'email' }));
 
     // handle the callback after facebook has authenticated the user
     router.get('/facebook/callback',

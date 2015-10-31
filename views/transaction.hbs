@@ -1,1 +1,32 @@
-TRANSACTION
+<div class="col-md-12" role="main">
+    <h1>Add transaction</h1>
+
+    <form class="clearfix" action="/user/transaction" method="post">
+        <div class="form-group form-group-sm">
+            <label for="type">Type</label>
+            <select class="form-control" id="type" name="type">
+                {{#each types}}
+                    <option value="{{id}}" {{#if selected}} selected="selected" {{/if}}>{{name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-group form-group-sm">
+            <label for="tags">Tags</label>
+            <input type="text" name="tags" id="tags" class="form-control" placeholder="Tags">
+        </div>
+        <div class="form-group form-group-sm">
+            <label for="amount">Amount</label>
+            <div class="input-group">
+                <input type="input" name="amount" class="form-control" id="amount" placeholder="Amount" value="{{model.amount}}">
+                <div class="input-group-addon">HUF</div>
+            </div>
+        </div>
+        <div class="form-group form-group-sm">
+            <label for="description">Description</label>
+            <textarea name="description" class="form-control" rows="3" id="description" placeholder="Description">{{model.description}}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-xs pull-right">Save transaction</button>
+    </form>
+
+</div>

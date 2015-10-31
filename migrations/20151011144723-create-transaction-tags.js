@@ -1,5 +1,4 @@
 'use strict';
-
 module.exports = {
     up: function(queryInterface, Sequelize) {
         return queryInterface.createTable('TransactionTags', {
@@ -24,6 +23,14 @@ module.exports = {
                     model: 'Tags',
                     key: 'id'
                 }
+            },
+            createdAt: {
+                allowNull: false,
+                type: Sequelize.DATE
+            },
+            updatedAt: {
+                allowNull: false,
+                type: Sequelize.DATE
             }
         });
     },

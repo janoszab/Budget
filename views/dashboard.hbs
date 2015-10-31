@@ -1,4 +1,42 @@
-DASHBOARD
+<div class="col-md-12" role="main">
+    <h1>Dashboard</h1>
 
-{{user.id}}
-{{user.username}}
+    <div class="table-responsive">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Desc.</th>
+                    <th>Amount</th>
+                    <th>Created at</th>
+                    <th>Created by</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#if transactions.rows}}
+                    {{#each transactions.rows}}
+                        <tr>
+                            <th scope="row">{{id}}</th>
+                            <td>{{description}}</td>
+                            <td>{{formatedAmount}}</td>
+                            <td>{{fromNow}}</td>
+                            <td>{{creator.username}}</td>
+                        </tr>
+                    {{/each}}
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
+
+    <nav>
+        <ul class="pager">
+            <li class="next {{#unless hasNext}}disabled{{/unless}}">
+                <a href="{{#if hasNext}}{{nextLink}}{{/if}}{{#unless hasNext}}#{{/unless}}">Newer <span aria-hidden="true">&rarr;</span></a>
+            </li>
+            <li class="previous {{#unless hasPrev}}disabled{{/unless}}">
+                <a href="{{#if hasPrev}}{{prevLink}}{{/if}}{{#unless hasPrev}}#{{/unless}}">
+                    <span aria-hidden="true">&larr;</span> Older</a>
+            </li>
+        </ul>
+    </nav>
+</div>
